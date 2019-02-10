@@ -1,1 +1,5 @@
+Content:
 https://www.fullstackreact.com/30-days-of-react/day-1/
+
+Code on Github:
+https://github.com/fullstackreact/30-days-of-react
