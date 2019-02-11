@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 class Content extends React.Component {
 	render() {
 		return(
@@ -52,3 +54,5 @@ class Content extends React.Component {
 		)
 	}
 }
+
+export default Content;
