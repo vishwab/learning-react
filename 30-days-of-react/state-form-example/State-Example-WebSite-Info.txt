@@ -1,0 +1,29 @@
+Example for State is taken from this site...
+
+https://codeburst.io/props-and-state-in-react-native-explained-in-simple-english-8ea73b1d224e
+
+
+State
+State works differently when compared to props. State is internal to a component, while props are passed to a component.
+
+State can Change — Mutable
+In english the ‘state of a being’ refers to the physical condition of a person, and it is a mere state, which changes over time. Well, similarly state in React/React Native is used within components to keep track of information.
+
+Keep in mind not to update state directly using this.state. Always use setState to update the state objects. Using setState re-renders the component and all the child components. This is great, because you don’t have to worry about writing event handlers like other languages.
+
+So when can state be used?
+
+Anytime there is data that is going to change within a component, state can be used.
+
+User interaction with components are good examples of how state works. Clicking buttons, checkboxes, filling forms, etc. are examples of user interaction where state can be used within the component.
+
+If you had to fill a form with text inputs, each field in the form will retain it’s state based on the user input. If the user input changes, the state of the text inputs will change, causing a re-rendering of the component and all of it’s child components.
+
+Take a look at the code snippet in this project to better understand how states works within a form.
+
+
+In the code snippet you can see a Form class with an input state. It renders a text input which accepts the user’s input. Once the user inputs the text, the onChangeText is triggered which in turn calls setState on input.
+
+The setState triggers a re-rendering of the component again, and the UI is now updated with the user’s latest input. This simple example illustrates how state within a component can be updated and its usage.
+
+If you don’t want the component to re-render with the state changes, the shouldComponentUpdate() lifecycle method can be used. This is a topic we can dive into in my future posts.
