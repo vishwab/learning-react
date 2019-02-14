@@ -87,7 +87,6 @@ export default class ShoppingList extends React.Component {
 					handleEvent={this.handleEvent} />
 				</label>
 
-
 			</form>
 		);
 	}
@@ -101,7 +100,7 @@ class Items extends React.Component {
 		
 		return(
 			<ul>
-				{this.props.itemsList.map(
+				{itemsList.map(
 					(item) => <Item item={item} handleClick={handleEvent} />
 				)}
 			</ul>

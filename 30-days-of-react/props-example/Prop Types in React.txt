@@ -1,0 +1,136 @@
+Prop Types in React
+===================
+
+Basic Types
+------------
+React exposes a few basic types we can use out of the box.
+
+type			example											class
+String		'hello'												PropTypes.string
+Number		10, 0.1												PropTypes.number
+Boolean		true / false										PropTypes.bool
+Function	const say => (msg) => console.log("Hello world")	PropTypes.func
+Symbol		Symbol("msg")										PropTypes.symbol
+Object		{name: 'Ari'}										PropTypes.object
+Anything	'whatever', 10, {}	
+A renderable	'hello'											PropTypes.node
+	10
+
+
+Collection Types
+----------------
+Array				[]											PropTypes.array
+Array of numbers	[1, 2, 3]									PropTypes.arrayOf([type])
+Enum				['Red', 'Blue']								PropTypes.oneOf([arr])
+
+
+It's possible to describe an object that can be one of a few different types as well using PropTypes.oneOfType([types]).
+
+Clock.propTypes = {
+  counts: PropTypes.array,
+  users: PropTypes.arrayOf(PropTypes.object),
+  alarmColor: PropTypes.oneOf(['red', 'blue']),
+  description: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(Title)
+    ]),
+}
+
+
+Object Types
+------------
+It's possible to define types that need to be of a certain shape or instance of a certain class.
+
+type			example					class
+Object			{name: 'Ari'}		PropTypes.object
+Number object	{count: 42}			PropTypes.objectOf()
+Instance		new Message()		PropTypes.objectOf()
+Object shape	{name: 'Ari'}		PropTypes.shape()
+
+Clock.propTypes = {
+  basicObject: PropTypes.object,
+
+  numbers: PropTypes
+    .objectOf(PropTypes.numbers),
+
+  messages: PropTypes
+    .instanceOf(Message),
+
+  contactList: PropTypes.shape({
+    name: PropTypes.string,
+    phone: PropTypes.string,
+  })
+}
+
+
+React Types
+-----------
+
+type		example		class
+Element		<Title />	PropTypes.element
+
+Clock.propTypes = {
+  displayEle: PropTypes.element
+}
+
+When we use element, React expects that we'll be able to accept a single child component. That is, we won't be able to pass multiple elements.
+
+// Invalid for elements
+<Clock displayElement={
+  <div>Name</div>
+  <div>Age</div>
+}></Clock>
+// Valid
+<Clock displayElement={
+  <div>
+    <div>Name</div>
+    <div>Age</div>
+  </div>
+}></Clock>
+
+
+
+Requiring Types
+---------------
+It's possible to require a prop to be passed to a component by appending any of the proptype descriptions with .isRequired:
+
+Clock.propTypes = {
+  title: PropTypes.name.isRequired,
+}
+Setting a prop as required is very useful for times when the component is dependent upon a prop to be passed in by it's parent component and won't work without it.
+
+
+
+Custom Types
+--------------
+Finally, it's also possible to pass a function to define custom types. We can do this for a single prop or to validate arrays. The one requirement for the custom function is that if the validation does not pass, it expects we'll return an Error object:
+
+type			example						class
+Custom			'something_crazy'			function(props, propName, componentName) {}
+CustomArray		['something', 'crazy']		PropTypes.arrayOf(function(props, propName, componentName) {})
+
+
+UserLink.propTypes = {
+  userWithName: (props, propName, componentName) => {
+    if (!props[propName] || !props[propName].name) {
+      return new Error(
+        "Invalid " + propName + ": No name property defined for component " + componentName
+      )
+    }
+  }
+}
+
+
+
+Default Props
+-------------
+
+Sometimes we want to be able to set a default value for a prop. For instance, our <Header /> component, we built yesterday might not require a title to be passed. If it's not, we'll still want a title to be rendered, so we can define a common title instead by setting it's default prop value.
+
+To set a default prop value, we can use the defaultProps object key on the component.
+
+Header.defaultProps = {
+  title: 'Github activity'
+}
+Phew, today we went through a lot of documentation. It's always a good idea to build our resuable components using the propTypes and defaultProps attributes of components. Not only will it make it easier to communicate across developers, it'll be much easier when we return to our components after leaving them for a few days.
+

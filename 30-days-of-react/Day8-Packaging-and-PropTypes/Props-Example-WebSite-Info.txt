@@ -1,0 +1,21 @@
+Example for Props is taken from this site...
+
+https://codeburst.io/props-and-state-in-react-native-explained-in-simple-english-8ea73b1d224e
+
+
+Props
+Props are short for Properties. The simple rule of thumb is props should not be changed. In the programming world we call it “Immutable” or in simple english “Unchangeable”.
+
+Props are Unchangeable — Immutable
+Components receive props from their parent. These props should not be modified inside the component. In React and React Native the data flows in one direction -> From the parent to the child.
+
+You can write your own components that use props. The idea behind props is that you can make a single component that is used in many different places in your app. The parent that is calling the component can set the properties, which could be different in each place.
+
+Props essentially help you write reusable code.
+
+
+In the example above we have a Heading component, with a message prop. The parent class ScreenOne sends the prop to the child component Heading.
+
+Notice that the same component Heading can be reused several times with different message prop values passed to it from different parents components. The key here is to remember that the prop should not be modified inside the Heading component.
+
+You can create as many screens as you would like to include the same Heading component with different message props.
